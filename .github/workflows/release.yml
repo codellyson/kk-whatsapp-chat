@@ -1,0 +1,52 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm build
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            ## CDN Usage
+
+            ### jsDelivr
+            ```html
+            <!-- CSS -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/${{ github.repository }}@${{ github.ref_name }}/dist/whatsapp-widget.css">
+
+            <!-- JavaScript -->
+            <script src="https://cdn.jsdelivr.net/gh/${{ github.repository }}@${{ github.ref_name }}/dist/whatsapp-widget.iife.js"></script>
+            ```
+          draft: false
+          prerelease: false
