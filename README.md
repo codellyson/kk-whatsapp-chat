@@ -1,3 +1,5 @@
+[![Release](https://github.com/codellyson/kk-whatsapp-chat/actions/workflows/release.yml/badge.svg?event=release)](https://github.com/codellyson/kk-whatsapp-chat/actions/workflows/release.yml)
+
 # WhatsApp Widget Pro
 
 A comprehensive, enterprise-ready WhatsApp widget for websites that allows visitors to easily connect with your team members through WhatsApp chat. Built with TypeScript and designed for serious business use.
