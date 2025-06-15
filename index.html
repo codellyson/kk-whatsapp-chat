@@ -5,12 +5,17 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WhatsApp Widget - Interactive Documentation</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
+
     <link rel="stylesheet" href="/src/style.css" />
     <style>
+      .kk_wa-play-button {
+        background-color: #25d366;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
       /* Documentation specific styles */
       .doc-container {
         max-width: 1200px;
@@ -185,277 +190,14 @@
     </style>
   </head>
   <body>
-    <div class="doc-container">
-      <!-- Header -->
-      <header class="doc-header">
-        <h1><i class="fab fa-whatsapp"></i> WhatsApp Widget</h1>
-        <p>Interactive Documentation & Live Demo</p>
-      </header>
-
-      <!-- Features Overview -->
-      <section class="config-section">
-        <h2><i class="fas fa-star"></i> Key Features</h2>
-        <div class="feature-grid">
-          <div class="feature-card">
-            <h4><i class="fas fa-users"></i> Multi-Member Support</h4>
-            <p>
-              Display multiple team members with individual WhatsApp contacts
-              and avatars.
-            </p>
-          </div>
-          <div class="feature-card">
-            <h4><i class="fas fa-mobile-alt"></i> Responsive Design</h4>
-            <p>
-              Works seamlessly on desktop and mobile devices with touch-friendly
-              interactions.
-            </p>
-          </div>
-          <div class="feature-card">
-            <h4><i class="fas fa-paint-brush"></i> Customizable</h4>
-            <p>
-              Fully customizable styling with CSS classes and configuration
-              options.
-            </p>
-          </div>
-          <div class="feature-card">
-            <h4><i class="fas fa-feather-alt"></i> Lightweight</h4>
-            <p>
-              Built with vanilla TypeScript, no heavy dependencies or frameworks
-              required.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- Basic Demo -->
-      <section class="demo-section">
-        <h2><i class="fas fa-play-circle"></i> Basic Demo</h2>
-        <div class="demo-grid">
-          <div class="demo-widget">
-            <h3>Live Widget</h3>
-            <p>Click the WhatsApp button to interact with the widget:</p>
-            <div class="kk_wa-widget" id="basic-widget"></div>
-          </div>
-          <div class="demo-code">
-            <pre><code>// Basic Usage
-window.whatsappWidget("#basic-widget", {
-  members: [
-    {
-      name: "Customer Support",
-      phone: "+1234567890",
-      avatar: "https://placehold.co/400x400?text=Support"
-    },
-    {
-      name: "Sales Team",
-      phone: "+1234567891",
-      avatar: "https://placehold.co/400x400?text=Sales"
-    }
-  ]
-});</code></pre>
-          </div>
-        </div>
-      </section>
-
-      <!-- Advanced Demo -->
-      <section class="demo-section">
-        <h2><i class="fas fa-cogs"></i> Advanced Configuration</h2>
-        <div class="demo-grid">
-          <div class="demo-widget">
-            <h3>Styled Widget</h3>
-            <p>Widget with custom styling and multiple team members:</p>
-            <div class="kk_wa-widget" id="advanced-widget"></div>
-          </div>
-          <div class="demo-code">
-            <pre><code>// Advanced Configuration
-window.whatsappWidget("#advanced-widget", {
-  styles: {
-    button: {
-      backgroundColor: "#128C7E",
-      color: "#ffffff"
-    }
-  },
-  members: [
-    {
-      name: "John Smith",
-      phone: "+2348103742587",
-      avatar: "https://placehold.co/400x400?text=John"
-    },
-    {
-      name: "Sarah Johnson",
-      phone: "+2348103742588", 
-      avatar: "https://placehold.co/400x400?text=Sarah"
-    },
-    {
-      name: "Mike Wilson",
-      phone: "+2348103742589",
-      avatar: "https://placehold.co/400x400?text=Mike"
-    }
-  ]
-});</code></pre>
-          </div>
-        </div>
-      </section>
-
-      <!-- API Documentation -->
-      <section class="config-section">
-        <h2><i class="fas fa-code"></i> API Reference</h2>
-
-        <h3>Configuration Interface</h3>
-        <div class="demo-code">
-          <pre><code>interface WidgetConfig {
-  styles?: {
-    button?: {
-      backgroundColor?: string;
-      color?: string;
-    };
-  };
-  members: {
-    name: string;      // Team member's display name
-    phone: string;     // WhatsApp phone number with country code  
-    avatar: string;    // URL to member's profile image
-  }[];
-}</code></pre>
-        </div>
-
-        <h3>Parameters</h3>
-        <table class="api-table">
-          <thead>
-            <tr>
-              <th>Parameter</th>
-              <th>Type</th>
-              <th>Required</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>selector</code></td>
-              <td>string</td>
-              <td>Yes</td>
-              <td>CSS selector for the container element</td>
-            </tr>
-            <tr>
-              <td><code>config</code></td>
-              <td>WidgetConfig</td>
-              <td>Yes</td>
-              <td>Configuration object with members and optional styles</td>
-            </tr>
-            <tr>
-              <td><code>config.members</code></td>
-              <td>Member[]</td>
-              <td>Yes</td>
-              <td>Array of team members with name, phone, and avatar</td>
-            </tr>
-            <tr>
-              <td><code>config.styles</code></td>
-              <td>StyleConfig</td>
-              <td>No</td>
-              <td>Optional styling configuration for the widget button</td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-
-      <!-- Integration Guide -->
-      <section class="config-section">
-        <h2><i class="fas fa-puzzle-piece"></i> Integration Guide</h2>
-
-        <h3>1. Include Required Dependencies</h3>
-        <div class="demo-code">
-          <pre><code>&lt;!-- Font Awesome for icons --&gt;
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" /&gt;
-
-&lt;!-- Widget Styles --&gt;
-&lt;link rel="stylesheet" href="path/to/widget-styles.css" /&gt;</code></pre>
-        </div>
-
-        <h3>2. Add Widget Container</h3>
-        <div class="demo-code">
-          <pre><code>&lt;!-- Widget will be inserted here --&gt;
-&lt;div id="whatsapp-widget"&gt;&lt;/div&gt;</code></pre>
-        </div>
-
-        <h3>3. Initialize Widget</h3>
-        <div class="demo-code">
-          <pre><code>&lt;script src="path/to/widget.js"&gt;&lt;/script&gt;
-&lt;script&gt;
-  document.addEventListener("DOMContentLoaded", () => {
-    window.whatsappWidget("#whatsapp-widget", {
-      members: [
-        {
-          name: "Your Name",
-          phone: "+1234567890",
-          avatar: "https://your-avatar-url.jpg"
-        }
-      ]
-    });
-  });
-&lt;/script&gt;</code></pre>
-        </div>
-      </section>
-
-      <!-- CSS Customization -->
-      <section class="config-section">
-        <h2><i class="fas fa-palette"></i> CSS Customization</h2>
-
-        <h3>Available CSS Classes</h3>
-        <table class="api-table">
-          <thead>
-            <tr>
-              <th>CSS Class</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>.kk_wa-button</code></td>
-              <td>Main WhatsApp floating button</td>
-            </tr>
-            <tr>
-              <td><code>.kk_wa-chat-container</code></td>
-              <td>Chat popup container</td>
-            </tr>
-            <tr>
-              <td><code>.kk_wa-chat-header</code></td>
-              <td>Header section of the chat popup</td>
-            </tr>
-            <tr>
-              <td><code>.kk_wa-member-card</code></td>
-              <td>Individual member card</td>
-            </tr>
-            <tr>
-              <td><code>.kk_wa-member-avatar</code></td>
-              <td>Member avatar container</td>
-            </tr>
-            <tr>
-              <td><code>.kk_wa-member-info</code></td>
-              <td>Member name and phone information</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>Custom Styling Example</h3>
-        <div class="demo-code">
-          <pre><code>/* Custom button styling */
-.kk_wa-button {
-  background-color: #128c7e !important;
-  border-radius: 50px !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-}
-
-/* Custom chat container styling */
-.kk_wa-chat-container {
-  border-radius: 12px !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
-}</code></pre>
-        </div>
-      </section>
-    </div>
+    <!-- <div id="business-widget"></div> -->
+    <div id="advanced-widget"></div>
+    <!-- <div id="basic-widget"></div> -->
 
     <!-- Widget Script -->
     <script type="module" src="/src/main.ts"></script>
 
-    <!-- Initialize Widgets -->
+    <!-- Play Buttons -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
         // Basic Widget
@@ -466,44 +208,200 @@ window.whatsappWidget("#advanced-widget", {
               phone: "+2348103742587",
               avatar:
                 "https://placehold.co/400x400?text=Support&bg=25D366&color=fff",
+              title: "Support Specialist",
+              isOnline: true,
             },
             {
               name: "Sales Team",
               phone: "+2348103742588",
               avatar:
                 "https://placehold.co/400x400?text=Sales&bg=128C7E&color=fff",
+              title: "Sales Representative",
+              skills: ["Sales", "Product Demo"],
             },
           ],
         });
 
+        // Business Widget with Advanced Features
+        window.whatsappWidget("#business-widget", {
+          businessInfo: {
+            name: "TechCorp Solutions",
+            tagline: "Your Technology Partner",
+            logo: "https://placehold.co/100x100?text=TC&bg=6C5CE7&color=fff",
+          },
+          businessHours: {
+            enabled: true,
+            schedule: {
+              mon: { open: "09:00", close: "17:00" },
+              tue: { open: "09:00", close: "17:00" },
+              wed: { open: "09:00", close: "17:00" },
+              thu: { open: "09:00", close: "17:00" },
+              fri: { open: "09:00", close: "17:00" },
+            },
+            offlineMessage: "We're currently offline but will respond soon!",
+          },
+          departments: [
+            {
+              id: "sales",
+              name: "Sales Department",
+              description: "Product inquiries and pricing information",
+              icon: "💰",
+              members: [
+                {
+                  id: "alice",
+                  name: "Alice Johnson",
+                  phone: "+2348103742587",
+                  avatar:
+                    "https://placehold.co/400x400?text=Alice&bg=FF6B6B&color=fff",
+                  title: "Sales Manager",
+                  skills: ["Enterprise Sales", "SaaS", "B2B"],
+                  isOnline: true,
+                },
+              ],
+            },
+            {
+              id: "support",
+              name: "Technical Support",
+              description: "Technical help and troubleshooting",
+              icon: "🛠️",
+              members: [
+                {
+                  id: "bob",
+                  name: "Bob Smith",
+                  phone: "+2348103742588",
+                  avatar:
+                    "https://placehold.co/400x400?text=Bob&bg=4ECDC4&color=fff",
+                  title: "Senior Developer",
+                  skills: ["JavaScript", "React", "Node.js", "API Integration"],
+                  isOnline: true,
+                },
+              ],
+            },
+          ],
+          leadCapture: {
+            enabled: true,
+            showBefore: "member-selection",
+            fields: {
+              name: { required: true, placeholder: "Your full name" },
+              email: {
+                required: true,
+                placeholder: "your.email@company.com",
+                type: "email",
+              },
+              company: {
+                required: false,
+                placeholder: "Company name (optional)",
+              },
+            },
+            onLeadCapture: (data) => {
+              console.log("Lead captured:", data);
+              // Here you could send data to your CRM or analytics service
+            },
+          },
+          quickMessages: [
+            {
+              category: "general",
+              messages: [
+                {
+                  label: "Product Demo",
+                  text: "I'd like to schedule a product demonstration",
+                },
+                {
+                  label: "Pricing Info",
+                  text: "Can you send me detailed pricing information?",
+                },
+                {
+                  label: "Technical Support",
+                  text: "I need help with technical issues",
+                },
+                {
+                  label: "Partnership",
+                  text: "I'm interested in partnership opportunities",
+                },
+              ],
+            },
+          ],
+          analytics: {
+            enabled: true,
+            events: {
+              onWidgetOpen: (data) => console.log("Widget opened:", data),
+              onMemberSelect: (member) =>
+                console.log("Member selected:", member.name),
+              onMessageSent: (data) =>
+                console.log(
+                  "Message sent to:",
+                  data.member.name,
+                  "Message:",
+                  data.message
+                ),
+              onLeadCapture: (data) => console.log("Lead captured:", data),
+              onWidgetClose: () => console.log("Widget closed"),
+            },
+          },
+          theme: {
+            brandColors: {
+              primary: "#25D366",
+              secondary: "#128C7E",
+              accent: "#075E54",
+            },
+          },
+        });
+
         // Advanced Widget
         window.whatsappWidget("#advanced-widget", {
-          styles: {
-            button: {
-              backgroundColor: "#128C7E",
-              color: "#ffffff",
+          position: "bottom-left",
+          theme: {
+            brandColors: {
+              primary: "#6C5CE7",
+              secondary: "#5A4FCF",
+              accent: "#4834D4",
+            },
+            typography: {
+              fontFamily: "Inter, system-ui, sans-serif",
+              fontSize: "14px",
             },
           },
           members: [
             {
-              name: "John Smith",
-              phone: "+2348103742587",
-              avatar:
-                "https://placehold.co/400x400?text=John&bg=FF6B6B&color=fff",
-            },
-            {
-              name: "Sarah Johnson",
-              phone: "+2348103742588",
-              avatar:
-                "https://placehold.co/400x400?text=Sarah&bg=4ECDC4&color=fff",
-            },
-            {
-              name: "Mike Wilson",
+              name: "Design Team",
               phone: "+2348103742589",
               avatar:
-                "https://placehold.co/400x400?text=Mike&bg=45B7D1&color=fff",
+                "https://placehold.co/400x400?text=Design&bg=6C5CE7&color=fff",
+              title: "UI/UX Designer",
+              skills: ["Figma", "Adobe XD", "Prototyping", "User Research"],
+              isOnline: true,
             },
           ],
+          quickMessages: [
+            {
+              category: "design",
+              messages: [
+                {
+                  label: "Design Consultation",
+                  text: "I need help with design consultation",
+                },
+                {
+                  label: "UI/UX Review",
+                  text: "Can you review my current design?",
+                },
+                {
+                  label: "Prototype Feedback",
+                  text: "I'd like feedback on my prototype",
+                },
+              ],
+            },
+          ],
+          analytics: {
+            enabled: true,
+            events: {
+              onWidgetOpen: (data) =>
+                console.log("Design widget opened:", data),
+              onMemberSelect: (member) =>
+                console.log("Design team selected:", member.name),
+            },
+          },
+          autoOpen: false,
+          showBranding: true,
         });
       });
     </script>

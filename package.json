@@ -1,13 +1,36 @@
 {
   "name": "whatsapp-widget",
-  "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "A customizable WhatsApp widget for websites",
   "type": "module",
+  "main": "./dist/whatsapp-widget.umd.js",
+  "module": "./dist/whatsapp-widget.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/whatsapp-widget.es.js",
+      "require": "./dist/whatsapp-widget.umd.js"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepublishOnly": "pnpm build"
   },
+  "keywords": [
+    "whatsapp",
+    "widget",
+    "chat",
+    "customer-support",
+    "javascript",
+    "typescript"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
   "devDependencies": {
     "typescript": "~5.8.3",
     "vite": "^6.3.5"
