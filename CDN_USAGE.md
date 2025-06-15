@@ -11,7 +11,7 @@
     <!-- CSS -->
     <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/yourusername/whatsapp-widget@latest/dist/whatsapp-widget.css"
+      href="https://cdn.jsdelivr.net/gh/codellyson/kk-whatsapp-widget@latest/dist/kk-whatsapp-widget.css"
     />
   </head>
   <body>
@@ -19,7 +19,7 @@
     <div id="whatsapp-widget"></div>
 
     <!-- JavaScript -->
-    <script src="https://cdn.jsdelivr.net/gh/yourusername/whatsapp-widget@latest/dist/whatsapp-widget.iife.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/codellyson/kk-whatsapp-widget@latest/dist/kk-whatsapp-widget.iife.js"></script>
 
     <!-- Initialize -->
     <script>
@@ -44,11 +44,11 @@
 <!-- CSS -->
 <link
   rel="stylesheet"
-  href="https://unpkg.com/whatsapp-widget@latest/dist/whatsapp-widget.css"
+  href="https://unpkg.com/kk-whatsapp-widget@latest/dist/kk-whatsapp-widget.css"
 />
 
 <!-- JavaScript -->
-<script src="https://unpkg.com/whatsapp-widget@latest/dist/whatsapp-widget.iife.js"></script>
+<script src="https://unpkg.com/kk-whatsapp-widget@latest/dist/kk-whatsapp-widget.iife.js"></script>
 ```
 
 ## Available Build Formats

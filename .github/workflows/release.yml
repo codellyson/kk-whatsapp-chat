@@ -5,6 +5,10 @@ on:
     tags:
       - "v*.*.*"
 
+permissions:
+  contents: write
+  packages: write
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -29,24 +33,68 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: |
-            ## CDN Usage
+      - name: Get version from tag
+        id: get_version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
 
-            ### jsDelivr
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.get_version.outputs.VERSION }}
+          name: Release ${{ steps.get_version.outputs.VERSION }}
+          body: |
+            ## 🚀 CDN Usage
+
+            ### jsDelivr (Recommended)
             ```html
             <!-- CSS -->
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/${{ github.repository }}@${{ github.ref_name }}/dist/whatsapp-widget.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/codellyson/kk-whatsapp-widget@${{ steps.get_version.outputs.VERSION }}/dist/kk-whatsapp-widget.css">
 
             <!-- JavaScript -->
-            <script src="https://cdn.jsdelivr.net/gh/${{ github.repository }}@${{ github.ref_name }}/dist/whatsapp-widget.iife.js"></script>
+            <script src="https://cdn.jsdelivr.net/gh/codellyson/kk-whatsapp-widget@${{ steps.get_version.outputs.VERSION }}/dist/kk-whatsapp-widget.iife.js"></script>
             ```
+
+            ### unpkg
+            ```html
+            <!-- CSS -->
+            <link rel="stylesheet" href="https://unpkg.com/kk-whatsapp-widget@${{ steps.get_version.outputs.VERSION }}/dist/kk-whatsapp-widget.css">
+
+            <!-- JavaScript -->
+            <script src="https://unpkg.com/kk-whatsapp-widget@${{ steps.get_version.outputs.VERSION }}/dist/kk-whatsapp-widget.iife.js"></script>
+            ```
+
+            ## 📦 Files included:
+            - `kk-whatsapp-widget.css` - Stylesheet (11.7 KB)
+            - `kk-whatsapp-widget.iife.js` - Browser-ready JavaScript (14.4 KB)
+            - `kk-whatsapp-widget.umd.js` - Universal Module Definition (14.6 KB)
+            - `kk-whatsapp-widget.es.js` - ES Module (16.9 KB)
+            - Source maps for all JavaScript files
+
+            ## 🔧 Quick Start
+            ```html
+            <div id="whatsapp-widget"></div>
+            <script>
+              whatsappWidget('#whatsapp-widget', {
+                members: [
+                  {
+                    name: 'Support Team',
+                    phone: '1234567890',
+                    avatar: 'https://via.placeholder.com/50',
+                    title: 'Customer Support'
+                  }
+                ]
+              });
+            </script>
+            ```
+          files: |
+            dist/kk-whatsapp-widget.css
+            dist/kk-whatsapp-widget.iife.js
+            dist/kk-whatsapp-widget.umd.js
+            dist/kk-whatsapp-widget.es.js
+            dist/kk-whatsapp-widget.iife.js.map
+            dist/kk-whatsapp-widget.umd.js.map
+            dist/kk-whatsapp-widget.es.js.map
           draft: false
           prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

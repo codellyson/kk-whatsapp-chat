@@ -9,12 +9,12 @@
   "version": "1.0.0",
   "description": "A customizable WhatsApp widget for websites by codellyson",
   "type": "module",
-  "main": "./dist/whatsapp-widget.umd.js",
-  "module": "./dist/whatsapp-widget.es.js",
+  "main": "./dist/kk-whatsapp-widget.umd.js",
+  "module": "./dist/kk-whatsapp-widget.es.js",
   "exports": {
     ".": {
-      "import": "./dist/whatsapp-widget.es.js",
-      "require": "./dist/whatsapp-widget.umd.js"
+      "import": "./dist/kk-whatsapp-widget.es.js",
+      "require": "./dist/kk-whatsapp-widget.umd.js"
     },
     "./style.css": "./dist/style.css"
   },
