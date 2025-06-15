@@ -1,7 +1,13 @@
 {
-  "name": "whatsapp-widget",
+  "name": "kk-whatsapp-widget",
+  "author": "codellyson",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codellyson/kk-whatsapp-widget"
+  },
+  "homepage": "https://github.com/codellyson/kk-whatsapp-widget",
   "version": "1.0.0",
-  "description": "A customizable WhatsApp widget for websites",
+  "description": "A customizable WhatsApp widget for websites by codellyson",
   "type": "module",
   "main": "./dist/whatsapp-widget.umd.js",
   "module": "./dist/whatsapp-widget.es.js",
@@ -29,7 +35,6 @@
     "javascript",
     "typescript"
   ],
-  "author": "Your Name",
   "license": "MIT",
   "devDependencies": {
     "typescript": "~5.8.3",
