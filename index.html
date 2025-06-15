@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WhatsApp Widget - Interactive Documentation</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+    <style>
+      /* Documentation specific styles */
+      .doc-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+          sans-serif;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      .doc-header {
+        text-align: center;
+        margin-bottom: 60px;
+        background: linear-gradient(135deg, #25d366, #128c7e);
+        color: white;
+        padding: 60px 40px;
+        border-radius: 20px;
+        margin: -20px -20px 60px -20px;
+      }
+
+      .doc-header h1 {
+        font-size: 3rem;
+        margin: 0 0 20px 0;
+        font-weight: 700;
+      }
+
+      .doc-header p {
+        font-size: 1.3rem;
+        margin: 0;
+        opacity: 0.9;
+      }
+
+      .demo-section {
+        background: #f8f9fa;
+        border-radius: 15px;
+        padding: 40px;
+        margin: 40px 0;
+        border: 1px solid #e9ecef;
+      }
+
+      .demo-section > h2 {
+        color: #25d366;
+        margin-top: 0;
+        font-size: 2rem;
+        margin-bottom: 30px;
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+
+      .demo-widget {
+        position: relative;
+        min-height: 400px;
+        background: white;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .demo-code {
+        background: #2d3748;
+        color: #e2e8f0;
+        padding: 30px;
+        border-radius: 15px;
+        font-family: "Monaco", "Consolas", monospace;
+        font-size: 14px;
+        overflow-x: auto;
+        line-height: 1.5;
+      }
+
+      .demo-code pre {
+        margin: 0;
+        white-space: pre-wrap;
+      }
+
+      .config-section {
+        background: white;
+        border-radius: 15px;
+        padding: 40px;
+        margin: 40px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .config-section h3 {
+        color: #128c7e;
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 1.5rem;
+      }
+
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+      }
+
+      .feature-card {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #25d366;
+      }
+
+      .feature-card h4 {
+        color: #25d366;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+      }
+
+      .feature-card p {
+        margin: 0;
+        color: #666;
+      }
+
+      .api-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .api-table th,
+      .api-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #e9ecef;
+      }
+
+      .api-table th {
+        background: #25d366;
+        color: white;
+        font-weight: 600;
+      }
+
+      .api-table code {
+        background: #f8f9fa;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-family: "Monaco", "Consolas", monospace;
+        font-size: 13px;
+      }
+
+      @media (max-width: 768px) {
+        .demo-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .doc-header h1 {
+          font-size: 2rem;
+        }
+
+        .doc-header p {
+          font-size: 1.1rem;
+        }
+
+        .demo-section,
+        .config-section {
+          padding: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="doc-container">
+      <!-- Header -->
+      <header class="doc-header">
+        <h1><i class="fab fa-whatsapp"></i> WhatsApp Widget</h1>
+        <p>Interactive Documentation & Live Demo</p>
+      </header>
+
+      <!-- Features Overview -->
+      <section class="config-section">
+        <h2><i class="fas fa-star"></i> Key Features</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h4><i class="fas fa-users"></i> Multi-Member Support</h4>
+            <p>
+              Display multiple team members with individual WhatsApp contacts
+              and avatars.
+            </p>
+          </div>
+          <div class="feature-card">
+            <h4><i class="fas fa-mobile-alt"></i> Responsive Design</h4>
+            <p>
+              Works seamlessly on desktop and mobile devices with touch-friendly
+              interactions.
+            </p>
+          </div>
+          <div class="feature-card">
+            <h4><i class="fas fa-paint-brush"></i> Customizable</h4>
+            <p>
+              Fully customizable styling with CSS classes and configuration
+              options.
+            </p>
+          </div>
+          <div class="feature-card">
+            <h4><i class="fas fa-feather-alt"></i> Lightweight</h4>
+            <p>
+              Built with vanilla TypeScript, no heavy dependencies or frameworks
+              required.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Basic Demo -->
+      <section class="demo-section">
+        <h2><i class="fas fa-play-circle"></i> Basic Demo</h2>
+        <div class="demo-grid">
+          <div class="demo-widget">
+            <h3>Live Widget</h3>
+            <p>Click the WhatsApp button to interact with the widget:</p>
+            <div class="kk_wa-widget" id="basic-widget"></div>
+          </div>
+          <div class="demo-code">
+            <pre><code>// Basic Usage
+window.whatsappWidget("#basic-widget", {
+  members: [
+    {
+      name: "Customer Support",
+      phone: "+1234567890",
+      avatar: "https://placehold.co/400x400?text=Support"
+    },
+    {
+      name: "Sales Team",
+      phone: "+1234567891",
+      avatar: "https://placehold.co/400x400?text=Sales"
+    }
+  ]
+});</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- Advanced Demo -->
+      <section class="demo-section">
+        <h2><i class="fas fa-cogs"></i> Advanced Configuration</h2>
+        <div class="demo-grid">
+          <div class="demo-widget">
+            <h3>Styled Widget</h3>
+            <p>Widget with custom styling and multiple team members:</p>
+            <div class="kk_wa-widget" id="advanced-widget"></div>
+          </div>
+          <div class="demo-code">
+            <pre><code>// Advanced Configuration
+window.whatsappWidget("#advanced-widget", {
+  styles: {
+    button: {
+      backgroundColor: "#128C7E",
+      color: "#ffffff"
+    }
+  },
+  members: [
+    {
+      name: "John Smith",
+      phone: "+2348103742587",
+      avatar: "https://placehold.co/400x400?text=John"
+    },
+    {
+      name: "Sarah Johnson",
+      phone: "+2348103742588", 
+      avatar: "https://placehold.co/400x400?text=Sarah"
+    },
+    {
+      name: "Mike Wilson",
+      phone: "+2348103742589",
+      avatar: "https://placehold.co/400x400?text=Mike"
+    }
+  ]
+});</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <!-- API Documentation -->
+      <section class="config-section">
+        <h2><i class="fas fa-code"></i> API Reference</h2>
+
+        <h3>Configuration Interface</h3>
+        <div class="demo-code">
+          <pre><code>interface WidgetConfig {
+  styles?: {
+    button?: {
+      backgroundColor?: string;
+      color?: string;
+    };
+  };
+  members: {
+    name: string;      // Team member's display name
+    phone: string;     // WhatsApp phone number with country code  
+    avatar: string;    // URL to member's profile image
+  }[];
+}</code></pre>
+        </div>
+
+        <h3>Parameters</h3>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>Parameter</th>
+              <th>Type</th>
+              <th>Required</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>selector</code></td>
+              <td>string</td>
+              <td>Yes</td>
+              <td>CSS selector for the container element</td>
+            </tr>
+            <tr>
+              <td><code>config</code></td>
+              <td>WidgetConfig</td>
+              <td>Yes</td>
+              <td>Configuration object with members and optional styles</td>
+            </tr>
+            <tr>
+              <td><code>config.members</code></td>
+              <td>Member[]</td>
+              <td>Yes</td>
+              <td>Array of team members with name, phone, and avatar</td>
+            </tr>
+            <tr>
+              <td><code>config.styles</code></td>
+              <td>StyleConfig</td>
+              <td>No</td>
+              <td>Optional styling configuration for the widget button</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Integration Guide -->
+      <section class="config-section">
+        <h2><i class="fas fa-puzzle-piece"></i> Integration Guide</h2>
+
+        <h3>1. Include Required Dependencies</h3>
+        <div class="demo-code">
+          <pre><code>&lt;!-- Font Awesome for icons --&gt;
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" /&gt;
+
+&lt;!-- Widget Styles --&gt;
+&lt;link rel="stylesheet" href="path/to/widget-styles.css" /&gt;</code></pre>
+        </div>
+
+        <h3>2. Add Widget Container</h3>
+        <div class="demo-code">
+          <pre><code>&lt;!-- Widget will be inserted here --&gt;
+&lt;div id="whatsapp-widget"&gt;&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>3. Initialize Widget</h3>
+        <div class="demo-code">
+          <pre><code>&lt;script src="path/to/widget.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  document.addEventListener("DOMContentLoaded", () => {
+    window.whatsappWidget("#whatsapp-widget", {
+      members: [
+        {
+          name: "Your Name",
+          phone: "+1234567890",
+          avatar: "https://your-avatar-url.jpg"
+        }
+      ]
+    });
+  });
+&lt;/script&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- CSS Customization -->
+      <section class="config-section">
+        <h2><i class="fas fa-palette"></i> CSS Customization</h2>
+
+        <h3>Available CSS Classes</h3>
+        <table class="api-table">
+          <thead>
+            <tr>
+              <th>CSS Class</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>.kk_wa-button</code></td>
+              <td>Main WhatsApp floating button</td>
+            </tr>
+            <tr>
+              <td><code>.kk_wa-chat-container</code></td>
+              <td>Chat popup container</td>
+            </tr>
+            <tr>
+              <td><code>.kk_wa-chat-header</code></td>
+              <td>Header section of the chat popup</td>
+            </tr>
+            <tr>
+              <td><code>.kk_wa-member-card</code></td>
+              <td>Individual member card</td>
+            </tr>
+            <tr>
+              <td><code>.kk_wa-member-avatar</code></td>
+              <td>Member avatar container</td>
+            </tr>
+            <tr>
+              <td><code>.kk_wa-member-info</code></td>
+              <td>Member name and phone information</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>Custom Styling Example</h3>
+        <div class="demo-code">
+          <pre><code>/* Custom button styling */
+.kk_wa-button {
+  background-color: #128c7e !important;
+  border-radius: 50px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Custom chat container styling */
+.kk_wa-chat-container {
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+}</code></pre>
+        </div>
+      </section>
+    </div>
+
+    <!-- Widget Script -->
+    <script type="module" src="/src/main.ts"></script>
+
+    <!-- Initialize Widgets -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // Basic Widget
+        window.whatsappWidget("#basic-widget", {
+          members: [
+            {
+              name: "Customer Support",
+              phone: "+2348103742587",
+              avatar:
+                "https://placehold.co/400x400?text=Support&bg=25D366&color=fff",
+            },
+            {
+              name: "Sales Team",
+              phone: "+2348103742588",
+              avatar:
+                "https://placehold.co/400x400?text=Sales&bg=128C7E&color=fff",
+            },
+          ],
+        });
+
+        // Advanced Widget
+        window.whatsappWidget("#advanced-widget", {
+          styles: {
+            button: {
+              backgroundColor: "#128C7E",
+              color: "#ffffff",
+            },
+          },
+          members: [
+            {
+              name: "John Smith",
+              phone: "+2348103742587",
+              avatar:
+                "https://placehold.co/400x400?text=John&bg=FF6B6B&color=fff",
+            },
+            {
+              name: "Sarah Johnson",
+              phone: "+2348103742588",
+              avatar:
+                "https://placehold.co/400x400?text=Sarah&bg=4ECDC4&color=fff",
+            },
+            {
+              name: "Mike Wilson",
+              phone: "+2348103742589",
+              avatar:
+                "https://placehold.co/400x400?text=Mike&bg=45B7D1&color=fff",
+            },
+          ],
+        });
+      });
+    </script>
+  </body>
+</html>
