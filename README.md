@@ -1,6 +1,6 @@
 [![Release](https://github.com/codellyson/kk-whatsapp-chat/actions/workflows/release.yml/badge.svg?event=release)](https://github.com/codellyson/kk-whatsapp-chat/actions/workflows/release.yml)
 
-# WhatsApp Widget Pro
+# KreativeKorna (KK) WhatsApp Widget Pro
 
 A comprehensive, enterprise-ready WhatsApp widget for websites that allows visitors to easily connect with your team members through WhatsApp chat. Built with TypeScript and designed for serious business use.
 
@@ -23,8 +23,8 @@ A comprehensive, enterprise-ready WhatsApp widget for websites that allows visit
 
 ```bash
 # Clone the repository
-git clone <repository-url>
-cd whatsapp-widget
+git clone https://github.com/codellyson/kk-whatsapp-chat.git
+cd kk-whatsapp-chat
 
 # Install dependencies
 pnpm install
@@ -41,9 +41,8 @@ pnpm dev
   <head>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      href="https://cdn.jsdelivr.net/npm/kk-whatsapp-chat@latest/dist/kk-whatsapp-chat.min.css"
     />
-    <link rel="stylesheet" href="path/to/widget-styles.css" />
   </head>
   <body>
     <!-- Widget container -->
