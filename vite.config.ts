@@ -11,7 +11,7 @@ export default defineConfig({
     lib: {
       entry: "src/main.ts",
       name: "WhatsAppWidget",
-      fileName: (format) => `kk-whatsapp-widget.${format}.js`,
+      fileName: (format) => `index.${format}.js`,
       formats: ["es", "umd", "iife"],
     },
     rollupOptions: {
