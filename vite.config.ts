@@ -13,6 +13,7 @@ export default defineConfig({
       name: "WhatsAppWidget",
       fileName: (format) => `index.${format}.js`,
       formats: ["es", "umd", "iife"],
+      cssFileName: "style",
     },
     rollupOptions: {
       output: {

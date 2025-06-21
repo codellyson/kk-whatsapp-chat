@@ -1,0 +1,56 @@
+{
+  "branches": ["main"],
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    [
+      "@semantic-release/npm",
+      {
+        "npmPublish": false
+      }
+    ],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["package.json", "CHANGELOG.md"],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    [
+      "@semantic-release/github",
+      {
+        "assets": [
+          {
+            "path": "dist/style.css",
+            "label": "Style CSS"
+          },
+          {
+            "path": "dist/index.iife.js",
+            "label": "IIFE Bundle"
+          },
+          {
+            "path": "dist/index.umd.js",
+            "label": "UMD Bundle"
+          },
+          {
+            "path": "dist/index.es.js",
+            "label": "ES Module Bundle"
+          },
+          {
+            "path": "dist/index.iife.js.map",
+            "label": "IIFE Source Map"
+          },
+          {
+            "path": "dist/index.umd.js.map",
+            "label": "UMD Source Map"
+          },
+          {
+            "path": "dist/index.es.js.map",
+            "label": "ES Module Source Map"
+          }
+        ]
+      }
+    ]
+  ]
+}

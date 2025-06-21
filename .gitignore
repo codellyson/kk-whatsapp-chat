@@ -22,3 +22,5 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+SEMANTIC_VERSIONING_SETUP.md
