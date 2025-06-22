@@ -1,3 +1,5 @@
+import "./style.css";
+
 // SVG Icons
 const SVG_ICONS = {
   whatsapp: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em">
@@ -271,7 +273,7 @@ class WhatsAppWidget {
   private createButton() {
     const existingButton = this.mountElement.querySelector(".kk_wa-button");
     if (existingButton) {
-      return;
+      existingButton.remove();
     }
 
     const chatButton = document.createElement("button");
