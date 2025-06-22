@@ -6,7 +6,7 @@
     "url": "https://github.com/codellyson/kk-whatsapp-widget"
   },
   "homepage": "https://github.com/codellyson/kk-whatsapp-widget",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A customizable WhatsApp widget for websites by codellyson",
   "type": "module",
   "main": "./dist/index.umd.js",

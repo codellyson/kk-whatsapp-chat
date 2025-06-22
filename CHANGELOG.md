@@ -1,3 +1,10 @@
+## [0.3.1](https://github.com/codellyson/kk-whatsapp-widget/compare/v0.3.0...v0.3.1) (2025-06-22)
+
+
+### Bug Fixes
+
+* Update main.ts to import style.css and improve button handling ([2385c03](https://github.com/codellyson/kk-whatsapp-widget/commit/2385c037e121ef23ba9dc71c8b6efa4bb8345725))
+
 # [0.3.0](https://github.com/codellyson/kk-whatsapp-widget/compare/v0.2.0...v0.3.0) (2025-06-22)
 
 
