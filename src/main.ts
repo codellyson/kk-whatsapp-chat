@@ -1,5 +1,3 @@
-import "./style.css";
-
 // SVG Icons
 const SVG_ICONS = {
   whatsapp: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="1em" height="1em">
@@ -271,6 +269,11 @@ class WhatsAppWidget {
   }
 
   private createButton() {
+    const existingButton = this.mountElement.querySelector(".kk_wa-button");
+    if (existingButton) {
+      return;
+    }
+
     const chatButton = document.createElement("button");
     chatButton.classList.add("kk_wa-button");
     chatButton.innerHTML = SVG_ICONS.whatsapp;
@@ -331,6 +334,7 @@ class WhatsAppWidget {
 
     content.innerHTML = this.getLeadCaptureFormHTML();
     this.attachLeadCaptureListeners();
+    this.showBranding(container);
   }
 
   private getLeadCaptureFormHTML(): string {
@@ -458,6 +462,9 @@ ${SVG_ICONS.chevronRight}
         }
       });
     });
+
+    // Show branding
+    this.showBranding(container);
   }
 
   private showMembers() {
@@ -557,6 +564,9 @@ ${SVG_ICONS.whatsapp}
       this.selectedDepartment = null;
       this.showDepartments();
     });
+
+    // Show branding
+    this.showBranding(container);
   }
 
   private selectMember(member: Member) {
@@ -799,13 +809,40 @@ ${SVG_ICONS.paperPlane}
       );
     }
   }
+
+  // show branding
+  private showBranding(mountElement: HTMLElement) {
+    console.log("showBranding called", this.config.showBranding);
+    console.log("mountElement", mountElement);
+
+    if (!this.config.showBranding) return;
+
+    // Remove any existing branding
+    const existingBranding = mountElement.querySelector(".kk_wa-branding");
+    if (existingBranding) {
+      existingBranding.remove();
+    }
+
+    const brandingContainer = document.createElement("div");
+    brandingContainer.classList.add("kk_wa-branding");
+    brandingContainer.innerHTML = `
+      <div class="kk_wa-branding-container">
+        <div class="kk_wa-branding-text">
+          <a href="https://kreativekorna.com" target="_blank">🚀 Powered by Kreative Korna</a>
+        </div>
+      </div>
+    `;
+
+    console.log("Appending branding to:", mountElement);
+    mountElement.appendChild(brandingContainer);
+    console.log("Branding appended successfully");
+  }
 }
 
 function whatsappWidget(widgetMountElId: string, config: WidgetConfig) {
   return new WhatsAppWidget(widgetMountElId, config);
 }
 
-// Expose to window for global access
 declare global {
   interface Window {
     whatsappWidget: typeof whatsappWidget;

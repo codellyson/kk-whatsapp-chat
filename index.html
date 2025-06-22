@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/kk-logo.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WhatsApp Widget - Interactive Documentation</title>
 
@@ -10,947 +10,1139 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/kk-whatsapp-widget/dist/style.css"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
     <style>
-      .kk_wa-play-button {
-        background-color: #25d366;
-        color: white;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      /* Documentation specific styles */
-      .doc-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-          sans-serif;
-        line-height: 1.6;
-        color: #333;
-      }
-
-      .doc-header {
-        text-align: center;
-        margin-bottom: 60px;
-        background: linear-gradient(135deg, #25d366, #128c7e);
-        color: white;
-        padding: 60px 40px;
-        border-radius: 20px;
-        margin: -20px -20px 60px -20px;
-      }
-
-      .doc-header h1 {
-        font-size: 3rem;
-        margin: 0 0 20px 0;
-        font-weight: 700;
-      }
-
-      .doc-header p {
-        font-size: 1.3rem;
+      * {
         margin: 0;
-        opacity: 0.9;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #25d366;
+        --primary-dark: #128c7e;
+        --secondary: #075e54;
+        --accent: #34d399;
+        --background: #0f172a;
+        --surface: #1e293b;
+        --surface-light: #334155;
+        --text-primary: #f8fafc;
+        --text-secondary: #cbd5e1;
+        --text-muted: #64748b;
+        --border: rgba(255, 255, 255, 0.1);
+        --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.1);
+        --gradient-primary: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+        --gradient-surface: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.1) 0%,
+          rgba(255, 255, 255, 0.05) 100%
+        );
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: var(--background);
+        /* color: var(--text-primary); */
+        line-height: 1.7;
+        overflow-x: hidden;
+      }
+
+      /* Background Effects */
+      body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(37, 211, 102, 0.3) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(18, 140, 126, 0.3) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 40% 80%,
+            rgba(7, 94, 84, 0.2) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      /* Header */
+      .hero {
+        text-align: center;
+        padding: 6rem 2rem;
+        position: relative;
+        margin-bottom: 4rem;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 2;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 8vw, 6rem);
+        font-weight: 800;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1.5rem;
+        line-height: 1.1;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        margin-bottom: 3rem;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-badges {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+      }
+
+      .badge {
+        padding: 0.5rem 1rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 50px;
+        backdrop-filter: blur(10px);
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-secondary);
+      }
+
+      /* Widget Type Cards */
+      .widget-types {
+        margin-bottom: 4rem;
+      }
+
+      .widget-types h2 {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 3rem;
+        color: var(--text-primary);
+      }
+
+      .widget-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+      }
+
+      .widget-card {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 2rem;
+        backdrop-filter: blur(20px);
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .widget-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: var(--gradient-primary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+      }
+
+      .widget-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--primary);
+        box-shadow: var(--shadow);
+      }
+
+      .widget-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .widget-card.active {
+        border-color: var(--primary);
+        background: linear-gradient(
+          135deg,
+          rgba(37, 211, 102, 0.1) 0%,
+          rgba(18, 140, 126, 0.05) 100%
+        );
+      }
+
+      .widget-card.active::before {
+        transform: scaleX(1);
+      }
+
+      .widget-card-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-primary);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .widget-card h3 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--text-primary);
+      }
+
+      .widget-card p {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .widget-card-features {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .feature-tag {
+        padding: 0.25rem 0.75rem;
+        background: rgba(37, 211, 102, 0.1);
+        border: 1px solid rgba(37, 211, 102, 0.2);
+        border-radius: 12px;
+        font-size: 0.75rem;
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      /* Main Content */
+      .main-content {
+        display: grid;
+        grid-template-columns: 1fr 400px;
+        gap: 3rem;
+        margin-bottom: 4rem;
       }
 
       .demo-section {
-        background: #f8f9fa;
-        border-radius: 15px;
-        padding: 40px;
-        margin: 40px 0;
-        border: 1px solid #e9ecef;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 2rem;
+        backdrop-filter: blur(20px);
+        height: fit-content;
       }
 
-      .demo-section > h2 {
-        color: #25d366;
-        margin-top: 0;
-        font-size: 2rem;
-        margin-bottom: 30px;
-      }
-
-      .demo-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-        align-items: start;
-      }
-
-      .demo-widget {
-        position: relative;
-        min-height: 400px;
-        background: white;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .demo-code {
-        background: #2d3748;
-        color: #e2e8f0;
-        padding: 30px;
-        border-radius: 15px;
-        font-family: "Monaco", "Consolas", monospace;
-        font-size: 14px;
-        overflow-x: auto;
-        line-height: 1.5;
-      }
-
-      .demo-code pre {
-        margin: 0;
-        white-space: pre-wrap;
-      }
-
-      .config-section {
-        background: white;
-        border-radius: 15px;
-        padding: 40px;
-        margin: 40px 0;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .config-section h3 {
-        color: #128c7e;
-        margin-top: 0;
-        margin-bottom: 20px;
-        font-size: 1.5rem;
-      }
-
-      .feature-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin: 40px 0;
-      }
-
-      .feature-card {
-        background: white;
-        border-radius: 15px;
-        padding: 30px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        border-left: 5px solid #25d366;
-      }
-
-      .feature-card h4 {
-        color: #25d366;
-        margin-top: 0;
-        margin-bottom: 15px;
-        font-size: 1.3rem;
-      }
-
-      .feature-card p {
-        margin: 0;
-        color: #666;
-      }
-
-      .api-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 20px 0;
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .api-table th,
-      .api-table td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid #e9ecef;
-      }
-
-      .api-table th {
-        background: #25d366;
-        color: white;
+      .demo-section > h3 {
+        font-size: 1.25rem;
         font-weight: 600;
-      }
-
-      .api-table code {
-        background: #f8f9fa;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-family: "Monaco", "Consolas", monospace;
-        font-size: 13px;
-      }
-
-      /* Interactive Controls Styles */
-      .controls-panel {
-        background: white;
-        border-radius: 15px;
-        padding: 30px;
-        margin: 20px 0;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        border: 2px solid #e9ecef;
-      }
-
-      .controls-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-      }
-
-      .control-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-
-      .control-group label {
-        font-weight: 600;
-        color: #333;
-        font-size: 14px;
-      }
-
-      .control-group input,
-      .control-group select,
-      .control-group textarea {
-        padding: 10px;
-        border: 2px solid #e9ecef;
-        border-radius: 8px;
-        font-size: 14px;
-        transition: border-color 0.2s;
-      }
-
-      .control-group input:focus,
-      .control-group select:focus,
-      .control-group textarea:focus {
-        outline: none;
-        border-color: #25d366;
-      }
-
-      .control-group input[type="color"] {
-        height: 45px;
-        cursor: pointer;
-      }
-
-      .control-group input[type="checkbox"] {
-        width: auto;
-        margin-right: 8px;
-      }
-
-      .checkbox-group {
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
         display: flex;
         align-items: center;
-        margin-top: 5px;
+        gap: 0.5rem;
       }
 
-      .color-preview {
-        width: 20px;
-        height: 20px;
-        border-radius: 4px;
-        border: 1px solid #ddd;
-        display: inline-block;
-        margin-left: 10px;
+      .widget-preview {
+        min-height: 500px;
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
       }
 
-      .tab-container {
-        margin: 40px 0;
+      .widget-preview::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+            circle at 30% 40%,
+            rgba(37, 211, 102, 0.1) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 70% 70%,
+            rgba(18, 140, 126, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
       }
 
-      .tab-nav {
+      /* Controls Panel */
+      .controls-panel {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        backdrop-filter: blur(20px);
+        overflow: hidden;
+      }
+
+      .controls-header {
+        padding: 2rem 2rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .controls-nav {
         display: flex;
-        background: #f8f9fa;
-        border-radius: 10px 10px 0 0;
-        padding: 0;
-        margin: 0;
-        list-style: none;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
       }
 
-      .tab-nav li {
-        flex: 1;
-      }
-
-      .tab-nav button {
-        width: 100%;
-        padding: 15px 20px;
-        border: none;
+      .nav-tab {
+        padding: 0.75rem 1.5rem;
         background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: var(--text-secondary);
         cursor: pointer;
-        font-weight: 600;
-        color: #666;
-        transition: all 0.2s;
+        transition: all 0.2s ease;
+        font-size: 0.875rem;
+        font-weight: 500;
       }
 
-      .tab-nav button.active {
-        background: #25d366;
+      .nav-tab:hover {
+        border-color: var(--primary);
+        color: var(--text-primary);
+      }
+
+      .nav-tab.active {
+        background: var(--gradient-primary);
+        border-color: var(--primary);
         color: white;
       }
 
-      .tab-nav button:first-child {
-        border-radius: 10px 0 0 0;
+      .controls-content {
+        padding: 2rem;
       }
 
-      .tab-nav button:last-child {
-        border-radius: 0 10px 0 0;
-      }
-
-      .tab-content {
-        background: white;
-        border-radius: 0 0 10px 10px;
-        padding: 0;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      }
-
-      .tab-pane {
+      .control-section {
         display: none;
-        padding: 40px;
+        animation: fadeIn 0.3s ease;
       }
 
-      .tab-pane.active {
+      .control-section.active {
         display: block;
       }
 
-      .reset-btn {
-        background: #dc3545;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 8px;
-        cursor: pointer;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .control-group {
+        margin-bottom: 2rem;
+      }
+
+      .control-label {
+        display: block;
+        font-size: 0.875rem;
         font-weight: 600;
-        margin: 20px 0;
-        transition: background 0.2s;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
       }
 
-      .reset-btn:hover {
-        background: #c82333;
+      .control-input {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: var(--text-primary);
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
       }
 
-      .apply-btn {
-        background: #25d366;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        border-radius: 8px;
+      .control-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.1);
+      }
+
+      .control-input[type="color"] {
+        height: 50px;
         cursor: pointer;
+        padding: 0.25rem;
+      }
+
+      .color-preview {
+        display: inline-block;
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        border: 2px solid var(--border);
+        margin-left: 0.75rem;
+        vertical-align: middle;
+      }
+
+      .checkbox-control {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 1rem;
+        background: var(--surface);
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .checkbox-control:hover {
+        background: var(--surface-light);
+      }
+
+      .checkbox-control input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        accent-color: var(--primary);
+      }
+      .checkbox-control label {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+      /* Code Section */
+      .code-section {
+        margin-top: 4rem;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 2rem;
+        backdrop-filter: blur(20px);
+      }
+
+      .code-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+      }
+
+      .code-header h3 {
+        font-size: 1.25rem;
         font-weight: 600;
-        margin: 20px 10px 20px 0;
-        transition: background 0.2s;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
 
-      .apply-btn:hover {
-        background: #128c7e;
-      }
-
-      .widget-type-selector {
-        background: #f8f9fa;
-        border-radius: 10px;
-        padding: 20px;
-        margin: 20px 0;
-      }
-
-      .widget-type-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin-top: 15px;
-      }
-
-      .widget-type-card {
-        background: white;
-        border: 2px solid #e9ecef;
-        border-radius: 10px;
-        padding: 20px;
+      .copy-btn {
+        padding: 0.5rem 1rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-secondary);
         cursor: pointer;
-        transition: all 0.2s;
-        text-align: center;
+        font-size: 0.875rem;
+        transition: all 0.2s ease;
       }
 
-      .widget-type-card:hover {
-        border-color: #25d366;
+      .copy-btn:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .code-output {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 1.5rem;
+        font-family: "Monaco", "Consolas", monospace;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        overflow-x: auto;
+        line-height: 1.6;
+        white-space: pre-wrap;
+      }
+
+      /* Action Buttons */
+      .actions {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin: 3rem 0;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 12px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+      }
+
+      .btn-primary {
+        background: var(--gradient-primary);
+        color: white;
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+      }
+
+      .btn-secondary {
+        background: var(--surface);
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        border-color: var(--primary);
+        color: var(--text-primary);
         transform: translateY(-2px);
       }
 
-      .widget-type-card.active {
-        border-color: #25d366;
-        background: #f0fff4;
+      /* Installation Guide */
+      .installation-guide {
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        padding: 3rem;
+        backdrop-filter: blur(20px);
+        margin: 4rem 0;
       }
 
-      .widget-type-card h4 {
-        margin: 0 0 10px 0;
-        color: #333;
+      .installation-guide h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+        text-align: center;
       }
 
-      .widget-type-card p {
-        margin: 0;
-        color: #666;
-        font-size: 13px;
+      .install-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin: 3rem 0;
+      }
+
+      .install-step {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 2rem;
+        position: relative;
+      }
+
+      .step-number {
+        position: absolute;
+        top: -12px;
+        left: 2rem;
+        width: 32px;
+        height: 32px;
+        background: var(--gradient-primary);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.875rem;
+        color: white;
+      }
+
+      .install-step h4 {
+        font-size: 1.125rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        margin-top: 0.5rem;
+      }
+
+      .install-step p {
+        color: var(--text-secondary);
+        margin-bottom: 1.5rem;
+      }
+
+      .code-snippet {
+        background: var(--background);
+        border-radius: 8px;
+        padding: 1rem;
+        font-family: "Monaco", "Consolas", monospace;
+        font-size: 0.8rem;
+        color: var(--accent);
+        overflow-x: auto;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .main-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .controls-panel {
+          order: -1;
+        }
       }
 
       @media (max-width: 768px) {
-        .demo-grid {
-          grid-template-columns: 1fr;
+        .container {
+          padding: 1rem;
         }
 
-        .controls-grid {
-          grid-template-columns: 1fr;
+        .hero {
+          padding: 4rem 1rem;
         }
 
-        .doc-header h1 {
-          font-size: 2rem;
-        }
-
-        .doc-header p {
-          font-size: 1.1rem;
-        }
-
-        .demo-section,
-        .config-section,
-        .controls-panel {
-          padding: 20px;
-        }
-
-        .tab-nav {
+        .hero-badges {
           flex-direction: column;
+          align-items: center;
         }
 
-        .tab-nav button:first-child,
-        .tab-nav button:last-child {
-          border-radius: 0;
+        .widget-grid {
+          grid-template-columns: 1fr;
         }
+
+        .controls-nav {
+          flex-wrap: wrap;
+        }
+
+        .actions {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .install-steps {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: 6rem;
+        padding: 3rem 0;
+        background: var(--glass-bg);
+        border-top: 1px solid var(--glass-border);
+        backdrop-filter: blur(20px);
+      }
+
+      .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .footer-branding {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+      }
+
+      .footer-logo {
+        width: 60px;
+        height: 60px;
+        border-radius: 16px;
+        object-fit: cover;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      }
+
+      .footer-text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+
+      .made-with {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .heart-icon {
+        color: #ff6b6b;
+        animation: heartbeat 1.5s ease-in-out infinite;
+      }
+
+      @keyframes heartbeat {
+        0% {
+          transform: scale(1);
+        }
+        14% {
+          transform: scale(1.1);
+        }
+        28% {
+          transform: scale(1);
+        }
+        42% {
+          transform: scale(1.1);
+        }
+        70% {
+          transform: scale(1);
+        }
+      }
+
+      .company-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 0;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .company-tagline {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        margin: 0;
+        font-style: italic;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .footer-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .footer-link:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      }
+
+      /* Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background: var(--surface);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background: var(--text-muted);
+        border-radius: 4px;
+      }
+
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary);
       }
     </style>
   </head>
   <body>
-    <div class="doc-container">
-      <div class="doc-header">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
         <h1>WhatsApp Widget</h1>
-        <p>Interactive Documentation & Live Configuration</p>
-      </div>
+        <p>
+          Build beautiful, customizable WhatsApp widgets that convert visitors
+          into customers. No coding required.
+        </p>
 
-      <!-- Widget Type Selector -->
-      <div class="widget-type-selector">
-        <h3>Choose Widget Type</h3>
-        <div class="widget-type-grid">
-          <div class="widget-type-card active" data-type="basic">
-            <h4>Basic Widget</h4>
-            <p>Simple widget with team members</p>
-          </div>
-          <div class="widget-type-card" data-type="business">
-            <h4>Business Widget</h4>
-            <p>Full-featured with departments & lead capture</p>
-          </div>
-          <div class="widget-type-card" data-type="advanced">
-            <h4>Advanced Widget</h4>
-            <p>Custom themed with advanced features</p>
-          </div>
+        <div class="hero-badges">
+          <span class="badge"
+            ><i class="fas fa-mobile-alt"></i> Mobile Optimized</span
+          >
+          <span class="badge"
+            ><i class="fas fa-palette"></i> Fully Customizable</span
+          >
+          <span class="badge"><i class="fas fa-bolt"></i> Lightning Fast</span>
+          <span class="badge"
+            ><i class="fas fa-shield-alt"></i> Privacy Focused</span
+          >
         </div>
       </div>
+    </section>
 
-      <!-- Tab Container -->
-      <div class="tab-container">
-        <ul class="tab-nav">
-          <li>
-            <button class="tab-btn active" data-tab="demo">Live Demo</button>
-          </li>
-          <li>
-            <button class="tab-btn" data-tab="installation">
-              Installation
-            </button>
-          </li>
-          <li>
-            <button class="tab-btn" data-tab="theme">Theme & Colors</button>
-          </li>
-          <li>
-            <button class="tab-btn" data-tab="position">
-              Position & Layout
-            </button>
-          </li>
-          <li><button class="tab-btn" data-tab="features">Features</button></li>
-        </ul>
-
-        <div class="tab-content">
-          <!-- Demo Tab -->
-          <div class="tab-pane active" id="demo-tab">
-            <div class="demo-grid">
-              <div class="demo-widget">
-                <h3>Widget Preview</h3>
-                <div id="widget-container"></div>
-              </div>
-              <div class="demo-code">
-                <h3 style="color: #e2e8f0; margin-top: 0">Generated Code</h3>
-                <pre id="code-output"></pre>
-              </div>
+    <div class="container">
+      <!-- Widget Type Selection -->
+      <section class="widget-types">
+        <h2>Choose Your Widget Style</h2>
+        <div class="widget-grid">
+          <div class="widget-card active" data-type="basic">
+            <div class="widget-card-icon">
+              <i class="fas fa-comments"></i>
+            </div>
+            <h3>Basic Widget</h3>
+            <p>
+              Perfect for small teams and simple use cases. Clean, lightweight,
+              and easy to set up.
+            </p>
+            <div class="widget-card-features">
+              <span class="feature-tag">Team Members</span>
+              <span class="feature-tag">Online Status</span>
+              <span class="feature-tag">Custom Messages</span>
             </div>
           </div>
 
-          <!-- Installation Tab -->
-          <div class="tab-pane" id="installation-tab">
-            <div class="config-section">
-              <h3>📦 Installation Methods</h3>
-
-              <!-- CDN Installation -->
-              <div style="margin-bottom: 40px">
-                <h4 style="color: #25d366; margin-bottom: 15px">
-                  🌐 CDN Installation (Recommended)
-                </h4>
-                <p style="margin-bottom: 15px">
-                  The easiest way to get started. Just add these two lines to
-                  your HTML:
-                </p>
-
-                <div class="demo-code" style="margin-bottom: 20px">
-                  <pre>
-&lt;!-- Add to your &lt;head&gt; section --&gt;
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/kk-whatsapp-widget/dist/style.css"&gt;
-
-&lt;!-- Add before closing &lt;/body&gt; tag --&gt;
-&lt;script src="https://cdn.jsdelivr.net/npm/kk-whatsapp-widget@latest/dist/index.umd.js"&gt;&lt;/script&gt;</pre
-                  >
-                </div>
-              </div>
-
-              <!-- NPM Installation -->
-              <div style="margin-bottom: 40px">
-                <h4 style="color: #25d366; margin-bottom: 15px">
-                  📦 NPM Installation
-                </h4>
-                <p style="margin-bottom: 15px">
-                  For projects using a build system like webpack, Vite, or
-                  Parcel:
-                </p>
-
-                <div class="demo-code" style="margin-bottom: 20px">
-                  <pre>
-# Using npm
-npm install kk-whatsapp-widget
-
-# Using pnpm (recommended)
-pnpm add kk-whatsapp-widget
-
-# Using yarn
-yarn add kk-whatsapp-widget</pre
-                  >
-                </div>
-
-                <p style="margin-bottom: 15px">
-                  Then import in your JavaScript:
-                </p>
-                <div class="demo-code" style="margin-bottom: 20px">
-                  <pre>
-import 'kk-whatsapp-widget/dist/style.css';
-import { whatsappWidget } from 'kk-whatsapp-widget';</pre
-                  >
-                </div>
-              </div>
-
-              <!-- Basic Usage -->
-              <div style="margin-bottom: 40px">
-                <h4 style="color: #25d366; margin-bottom: 15px">
-                  🚀 Basic Usage
-                </h4>
-                <p style="margin-bottom: 15px">
-                  Create a simple WhatsApp widget with team members:
-                </p>
-
-                <div class="demo-code" style="margin-bottom: 20px">
-                  <pre>
-&lt;!-- Add a container div --&gt;
-&lt;div id="whatsapp-widget"&gt;&lt;/div&gt;
-
-&lt;script&gt;
-// Initialize the widget
-window.whatsappWidget("#whatsapp-widget", {
-  members: [
-    {
-      name: "Customer Support",
-      phone: "+1234567890",
-      avatar: "https://placehold.co/400x400?text=Support",
-      title: "Support Specialist",
-      isOnline: true,
-    },
-    {
-      name: "Sales Team", 
-      phone: "+1234567891",
-      avatar: "https://placehold.co/400x400?text=Sales",
-      title: "Sales Representative",
-      skills: ["Sales", "Product Demo"],
-    },
-  ],
-});
-&lt;/script&gt;</pre
-                  >
-                </div>
-              </div>
-
-              <!-- Integration Steps -->
-              <div style="margin-bottom: 40px">
-                <h4 style="color: #25d366; margin-bottom: 15px">
-                  ⚡ Quick Integration Steps
-                </h4>
-
-                <div class="feature-grid">
-                  <div class="feature-card">
-                    <h4 style="color: #25d366">Step 1: Include Files</h4>
-                    <p>
-                      Add the CSS and JavaScript files to your HTML document
-                      using CDN or install via NPM.
-                    </p>
-                  </div>
-
-                  <div class="feature-card">
-                    <h4 style="color: #25d366">Step 2: Add Container</h4>
-                    <p>
-                      Create a div element where you want the widget to appear
-                      on your page.
-                    </p>
-                  </div>
-
-                  <div class="feature-card">
-                    <h4 style="color: #25d366">Step 3: Initialize Widget</h4>
-                    <p>
-                      Call the whatsappWidget function with your configuration
-                      options.
-                    </p>
-                  </div>
-
-                  <div class="feature-card">
-                    <h4 style="color: #25d366">Step 4: Customize</h4>
-                    <p>
-                      Use the interactive controls above to customize colors,
-                      features, and behavior.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Framework Examples -->
-              <div style="margin-bottom: 40px">
-                <h4 style="color: #25d366; margin-bottom: 15px">
-                  🔧 Framework Integration Examples
-                </h4>
-
-                <!-- React Example -->
-                <div style="margin-bottom: 30px">
-                  <h5 style="color: #128c7e; margin-bottom: 10px">React</h5>
-                  <div class="demo-code">
-                    <pre>
-import React, { useEffect, useRef } from 'react';
-import 'kk-whatsapp-widget/dist/style.css';
-
-const WhatsAppWidget = () => {
-  const widgetRef = useRef(null);
-
-  useEffect(() => {
-    if (widgetRef.current && window.whatsappWidget) {
-      window.whatsappWidget(widgetRef.current, {
-        members: [
-          {
-            name: "Support",
-            phone: "+1234567890",
-            avatar: "https://placehold.co/400x400?text=Support",
-            isOnline: true,
-          },
-        ],
-      });
-    }
-  }, []);
-
-  return &lt;div ref={widgetRef}&gt;&lt;/div&gt;;
-};</pre
-                    >
-                  </div>
-                </div>
-
-                <!-- Vue Example -->
-                <div style="margin-bottom: 30px">
-                  <h5 style="color: #128c7e; margin-bottom: 10px">Vue.js</h5>
-                  <div class="demo-code">
-                    <pre>
-&lt;template&gt;
-  &lt;div ref="whatsappWidget"&gt;&lt;/div&gt;
-&lt;/template&gt;
-
-&lt;script&gt;
-import 'kk-whatsapp-widget/dist/style.css';
-
-export default {
-  mounted() {
-    if (this.$refs.whatsappWidget && window.whatsappWidget) {
-      window.whatsappWidget(this.$refs.whatsappWidget, {
-        members: [
-          {
-            name: "Support",
-            phone: "+1234567890", 
-            avatar: "https://placehold.co/400x400?text=Support",
-            isOnline: true,
-          },
-        ],
-      });
-    }
-  },
-};
-&lt;/script&gt;</pre
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <!-- Configuration Options -->
-              <div style="margin-bottom: 40px">
-                <h4 style="color: #25d366; margin-bottom: 15px">
-                  ⚙️ Configuration Options
-                </h4>
-                <p style="margin-bottom: 15px">
-                  The widget accepts a configuration object with the following
-                  main properties:
-                </p>
-
-                <table class="api-table">
-                  <thead>
-                    <tr>
-                      <th>Property</th>
-                      <th>Type</th>
-                      <th>Description</th>
-                      <th>Required</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>members</code></td>
-                      <td>Array</td>
-                      <td>Array of team member objects</td>
-                      <td>Yes</td>
-                    </tr>
-                    <tr>
-                      <td><code>position</code></td>
-                      <td>String</td>
-                      <td>
-                        Widget position: 'bottom-right', 'bottom-left',
-                        'top-right', 'top-left'
-                      </td>
-                      <td>No</td>
-                    </tr>
-                    <tr>
-                      <td><code>theme</code></td>
-                      <td>Object</td>
-                      <td>Theme configuration with colors and typography</td>
-                      <td>No</td>
-                    </tr>
-                    <tr>
-                      <td><code>businessInfo</code></td>
-                      <td>Object</td>
-                      <td>Business information (name, logo, tagline)</td>
-                      <td>No</td>
-                    </tr>
-                    <tr>
-                      <td><code>leadCapture</code></td>
-                      <td>Object</td>
-                      <td>Lead capture form configuration</td>
-                      <td>No</td>
-                    </tr>
-                    <tr>
-                      <td><code>quickMessages</code></td>
-                      <td>Array</td>
-                      <td>Pre-defined quick message templates</td>
-                      <td>No</td>
-                    </tr>
-                    <tr>
-                      <td><code>analytics</code></td>
-                      <td>Object</td>
-                      <td>Analytics and event tracking configuration</td>
-                      <td>No</td>
-                    </tr>
-                    <tr>
-                      <td><code>autoOpen</code></td>
-                      <td>Boolean</td>
-                      <td>Whether to auto-open the widget on page load</td>
-                      <td>No</td>
-                    </tr>
-                    <tr>
-                      <td><code>showBranding</code></td>
-                      <td>Boolean</td>
-                      <td>Whether to show widget branding</td>
-                      <td>No</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-
-              <!-- Troubleshooting -->
-              <div>
-                <h4 style="color: #25d366; margin-bottom: 15px">
-                  🔧 Troubleshooting
-                </h4>
-
-                <div class="feature-grid">
-                  <div class="feature-card">
-                    <h4 style="color: #dc3545">Widget not showing?</h4>
-                    <p>
-                      Make sure you've included both the CSS and JavaScript
-                      files, and that the DOM element exists when you initialize
-                      the widget.
-                    </p>
-                  </div>
-
-                  <div class="feature-card">
-                    <h4 style="color: #dc3545">Console errors?</h4>
-                    <p>
-                      Check that all required properties are provided in your
-                      configuration object, especially the 'members' array.
-                    </p>
-                  </div>
-
-                  <div class="feature-card">
-                    <h4 style="color: #dc3545">Styling issues?</h4>
-                    <p>
-                      Ensure the CSS file is loaded before the widget
-                      initializes, and check for CSS conflicts with your site's
-                      styles.
-                    </p>
-                  </div>
-
-                  <div class="feature-card">
-                    <h4 style="color: #dc3545">Mobile problems?</h4>
-                    <p>
-                      The widget is responsive by default. Check your viewport
-                      meta tag and ensure you're not overriding the widget's
-                      mobile styles.
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <div class="widget-card" data-type="business">
+            <div class="widget-card-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <h3>Business Widget</h3>
+            <p>
+              Advanced features for growing businesses. Departments, lead
+              capture, and business hours.
+            </p>
+            <div class="widget-card-features">
+              <span class="feature-tag">Departments</span>
+              <span class="feature-tag">Lead Capture</span>
+              <span class="feature-tag">Business Hours</span>
+              <span class="feature-tag">Analytics</span>
             </div>
           </div>
 
-          <!-- Theme Tab -->
-          <div class="tab-pane" id="theme-tab">
-            <div class="controls-panel">
-              <h3>Theme Configuration</h3>
-              <div class="controls-grid">
-                <div class="control-group">
-                  <label for="primary-color">Primary Color</label>
-                  <input type="color" id="primary-color" value="#25D366" />
+          <div class="widget-card" data-type="advanced">
+            <div class="widget-card-icon">
+              <i class="fas fa-rocket"></i>
+            </div>
+            <h3>Advanced Widget</h3>
+            <p>
+              Maximum customization and features. Perfect for enterprises and
+              agencies.
+            </p>
+            <div class="widget-card-features">
+              <span class="feature-tag">Custom Themes</span>
+              <span class="feature-tag">Advanced Analytics</span>
+              <span class="feature-tag">API Integration</span>
+              <span class="feature-tag">White Label</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Content Grid -->
+      <div class="main-content">
+        <!-- Demo Section -->
+        <div class="demo-section">
+          <h3><i class="fas fa-eye"></i> Live Preview</h3>
+          <div class="widget-preview" id="widget-container">
+            <!-- Widget will be rendered here -->
+          </div>
+        </div>
+
+        <!-- Controls Panel -->
+        <div class="controls-panel">
+          <div class="controls-header">
+            <nav class="controls-nav">
+              <button class="nav-tab active" data-tab="theme">
+                <i class="fas fa-palette"></i> Theme
+              </button>
+              <button class="nav-tab" data-tab="layout">
+                <i class="fas fa-th-large"></i> Layout
+              </button>
+              <button class="nav-tab" data-tab="features">
+                <i class="fas fa-cog"></i> Features
+              </button>
+            </nav>
+          </div>
+
+          <div class="controls-content">
+            <!-- Theme Controls -->
+            <div class="control-section active" id="theme-controls">
+              <div class="control-group">
+                <label class="control-label">Primary Color</label>
+                <div style="display: flex; align-items: center">
+                  <input
+                    type="color"
+                    id="primary-color"
+                    class="control-input"
+                    value="#25D366"
+                  />
                   <span class="color-preview" id="primary-preview"></span>
                 </div>
-                <div class="control-group">
-                  <label for="secondary-color">Secondary Color</label>
-                  <input type="color" id="secondary-color" value="#128C7E" />
+              </div>
+
+              <div class="control-group">
+                <label class="control-label">Secondary Color</label>
+                <div style="display: flex; align-items: center">
+                  <input
+                    type="color"
+                    id="secondary-color"
+                    class="control-input"
+                    value="#128C7E"
+                  />
                   <span class="color-preview" id="secondary-preview"></span>
                 </div>
-                <div class="control-group">
-                  <label for="accent-color">Accent Color</label>
-                  <input type="color" id="accent-color" value="#075E54" />
+              </div>
+              <div class="control-group">
+                <label class="control-label">Accent Color</label>
+                <div style="display: flex; align-items: center">
+                  <input
+                    type="color"
+                    id="accent-color"
+                    class="control-input"
+                    value="#6C5CE7"
+                  />
                   <span class="color-preview" id="accent-preview"></span>
                 </div>
-                <div class="control-group">
-                  <label for="font-family">Font Family</label>
-                  <select id="font-family">
-                    <option value="Inter, system-ui, sans-serif">Inter</option>
-                    <option
-                      value="-apple-system, BlinkMacSystemFont, sans-serif"
-                    >
-                      System Font
-                    </option>
-                    <option value="Roboto, sans-serif">Roboto</option>
-                    <option value="Open Sans, sans-serif">Open Sans</option>
-                  </select>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label">Font Family</label>
+                <select id="font-family" class="control-input">
+                  <option value="Inter, system-ui, sans-serif">Inter</option>
+                  <option value="-apple-system, BlinkMacSystemFont, sans-serif">
+                    System Font
+                  </option>
+                  <option value="Roboto, sans-serif">Roboto</option>
+                  <option value="Open Sans, sans-serif">Open Sans</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label">Font Size</label>
+                <select id="font-size" class="control-input">
+                  <option value="12px">Small (12px)</option>
+                  <option value="14px" selected>Medium (14px)</option>
+                  <option value="16px">Large (16px)</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Layout Controls -->
+            <div class="control-section" id="layout-controls">
+              <div class="control-group">
+                <label class="control-label">Position</label>
+                <select id="position" class="control-input">
+                  <option value="bottom-right">Bottom Right</option>
+                  <option value="bottom-left">Bottom Left</option>
+                  <option value="top-right">Top Right</option>
+                  <option value="top-left">Top Left</option>
+                </select>
+              </div>
+
+              <!-- <div class="control-group">
+                <label class="control-label">Widget Size</label>
+                <select id="size" class="control-input">
+                  <option value="small">Small</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="large">Large</option>
+                </select>
+              </div> -->
+
+              <div class="control-group">
+                <div class="checkbox-control">
+                  <input type="checkbox" id="auto-open" />
+                  <label for="auto-open">Auto Open Widget</label>
                 </div>
-                <div class="control-group">
-                  <label for="font-size">Font Size</label>
-                  <select id="font-size">
-                    <option value="12px">Small (12px)</option>
-                    <option value="14px" selected>Medium (14px)</option>
-                    <option value="16px">Large (16px)</option>
-                  </select>
+              </div>
+
+              <div class="control-group">
+                <div class="checkbox-control">
+                  <input type="checkbox" id="show-branding" checked />
+                  <label for="show-branding">Show Branding</label>
                 </div>
               </div>
             </div>
-          </div>
 
-          <!-- Position Tab -->
-          <div class="tab-pane" id="position-tab">
-            <div class="controls-panel">
-              <h3>Position & Layout</h3>
-              <div class="controls-grid">
-                <div class="control-group">
-                  <label for="position">Position</label>
-                  <select id="position">
-                    <option value="bottom-right">Bottom Right</option>
-                    <option value="bottom-left">Bottom Left</option>
-                    <option value="top-right">Top Right</option>
-                    <option value="top-left">Top Left</option>
-                  </select>
-                </div>
-                <div class="control-group">
-                  <label for="size">Widget Size</label>
-                  <select id="size">
-                    <option value="small">Small</option>
-                    <option value="medium" selected>Medium</option>
-                    <option value="large">Large</option>
-                  </select>
-                </div>
-                <div class="control-group">
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="auto-open" />
-                    <label for="auto-open">Auto Open Widget</label>
-                  </div>
-                </div>
-                <div class="control-group">
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="show-branding" checked />
-                    <label for="show-branding">Show Branding</label>
-                  </div>
+            <!-- Features Controls -->
+            <div class="control-section" id="features-controls">
+              <div class="control-group">
+                <div class="checkbox-control">
+                  <input type="checkbox" id="enable-analytics" checked />
+                  <label for="enable-analytics">Enable Analytics</label>
                 </div>
               </div>
-            </div>
-          </div>
 
-          <!-- Features Tab -->
-          <div class="tab-pane" id="features-tab">
-            <div class="controls-panel">
-              <h3>Feature Configuration</h3>
-              <div class="controls-grid">
-                <div class="control-group">
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="enable-analytics" checked />
-                    <label for="enable-analytics">Enable Analytics</label>
-                  </div>
+              <div class="control-group">
+                <div class="checkbox-control">
+                  <input type="checkbox" id="enable-lead-capture" />
+                  <label for="enable-lead-capture">Enable Lead Capture</label>
                 </div>
-                <div class="control-group">
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="enable-lead-capture" />
-                    <label for="enable-lead-capture">Enable Lead Capture</label>
-                  </div>
+              </div>
+
+              <div class="control-group">
+                <div class="checkbox-control">
+                  <input type="checkbox" id="enable-business-hours" />
+                  <label for="enable-business-hours"
+                    >Enable Business Hours</label
+                  >
                 </div>
-                <div class="control-group">
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="enable-business-hours" />
-                    <label for="enable-business-hours"
-                      >Enable Business Hours</label
-                    >
-                  </div>
+              </div>
+
+              <div class="control-group">
+                <div class="checkbox-control">
+                  <input type="checkbox" id="enable-quick-messages" checked />
+                  <label for="enable-quick-messages"
+                    >Enable Quick Messages</label
+                  >
                 </div>
-                <div class="control-group">
-                  <div class="checkbox-group">
-                    <input type="checkbox" id="enable-quick-messages" checked />
-                    <label for="enable-quick-messages"
-                      >Enable Quick Messages</label
-                    >
-                  </div>
-                </div>
-                <div class="control-group">
-                  <label for="offline-message">Offline Message</label>
-                  <textarea
-                    id="offline-message"
-                    rows="3"
-                    placeholder="We're currently offline but will respond soon!"
-                  ></textarea>
-                </div>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label">Offline Message</label>
+                <textarea
+                  id="offline-message"
+                  class="control-input"
+                  rows="3"
+                  placeholder="We're currently offline but will respond soon!"
+                ></textarea>
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- Generated Code Section -->
+      <section class="code-section">
+        <div class="code-header">
+          <h3><i class="fas fa-code"></i> Generated Code</h3>
+          <button class="copy-btn" id="copy-code">
+            <i class="fas fa-copy"></i> Copy Code
+          </button>
+        </div>
+        <div class="code-output" id="code-output">
+          <!-- Generated code will appear here -->
+        </div>
+      </section>
+
       <!-- Action Buttons -->
-      <div style="text-align: center; margin: 40px 0">
-        <button class="apply-btn" id="apply-changes">Apply Changes</button>
-        <button class="reset-btn" id="reset-config">Reset to Default</button>
+      <div class="actions">
+        <button class="btn btn-primary" id="apply-changes">
+          <i class="fas fa-magic"></i> Apply Changes
+        </button>
+        <button class="btn btn-secondary" id="reset-config">
+          <i class="fas fa-undo"></i> Reset to Default
+        </button>
       </div>
+
+      <!-- Installation Guide -->
+      <section class="installation-guide">
+        <h2>Quick Installation Guide</h2>
+
+        <div class="install-steps">
+          <div class="install-step">
+            <div class="step-number">1</div>
+            <h4>Include CSS & JS</h4>
+            <p>Add the widget files to your HTML document:</p>
+            <div class="code-snippet">
+              &lt;link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/kk-whatsapp-widget/dist/style.css"&gt;
+              &lt;script
+              src="https://cdn.jsdelivr.net/npm/kk-whatsapp-widget@latest/dist/index.umd.js"&gt;&lt;/script&gt;
+            </div>
+          </div>
+
+          <div class="install-step">
+            <div class="step-number">2</div>
+            <h4>Add Container Element</h4>
+            <p>Create a div where the widget will be rendered:</p>
+            <div class="code-snippet">
+              &lt;div id="whatsapp-widget"&gt;&lt;/div&gt;
+            </div>
+          </div>
+
+          <div class="install-step">
+            <div class="step-number">3</div>
+            <h4>Initialize Widget</h4>
+            <p>Use the generated code from above to initialize your widget:</p>
+            <div class="code-snippet">
+              window.whatsappWidget("#whatsapp-widget", { // Your configuration
+              here });
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
 
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-branding">
+          <img
+            src="/kk-logo.png"
+            alt="Kreative Korna Logo"
+            class="footer-logo"
+          />
+          <div class="footer-text">
+            <p class="made-with">
+              Made with <i class="fas fa-heart heart-icon"></i> by
+            </p>
+            <h4 class="company-name">Kreative Korna</h4>
+            <p class="company-tagline">Crafting Digital Experiences</p>
+          </div>
+        </div>
+        <div class="footer-links">
+          <a href="#" class="footer-link" title="GitHub">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="#" class="footer-link" title="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="footer-link" title="LinkedIn">
+            <i class="fab fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
     <!-- Widget Script -->
-    <script src="https://cdn.jsdelivr.net/npm/kk-whatsapp-widget@latest/dist/index.umd.js"></script>
+    <script type="module" src="./src/main.ts"></script>
 
     <script>
       // Widget configurations
@@ -1136,38 +1328,18 @@ export default {
       let currentConfig = { ...widgetConfigs.basic };
       let widgetInstance = null;
 
-      // Initialize the documentation
+      // Initialize the application
       document.addEventListener("DOMContentLoaded", () => {
-        initializeTabs();
-        initializeControls();
         initializeWidgetTypeSelector();
+        initializeControls();
+        initializeNavTabs();
         updateColorPreviews();
         applyCurrentConfig();
       });
 
-      // Tab functionality
-      function initializeTabs() {
-        const tabBtns = document.querySelectorAll(".tab-btn");
-        const tabPanes = document.querySelectorAll(".tab-pane");
-
-        tabBtns.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const targetTab = btn.dataset.tab;
-
-            // Update active tab button
-            tabBtns.forEach((b) => b.classList.remove("active"));
-            btn.classList.add("active");
-
-            // Update active tab pane
-            tabPanes.forEach((pane) => pane.classList.remove("active"));
-            document.getElementById(`${targetTab}-tab`).classList.add("active");
-          });
-        });
-      }
-
       // Widget type selector
       function initializeWidgetTypeSelector() {
-        const cards = document.querySelectorAll(".widget-type-card");
+        const cards = document.querySelectorAll(".widget-card");
 
         cards.forEach((card) => {
           card.addEventListener("click", () => {
@@ -1188,6 +1360,30 @@ export default {
         });
       }
 
+      // Navigation tabs
+      function initializeNavTabs() {
+        const navTabs = document.querySelectorAll(".nav-tab");
+        const controlSections = document.querySelectorAll(".control-section");
+
+        navTabs.forEach((tab) => {
+          tab.addEventListener("click", () => {
+            const targetTab = tab.dataset.tab;
+
+            // Update active tab
+            navTabs.forEach((t) => t.classList.remove("active"));
+            tab.classList.add("active");
+
+            // Update active section
+            controlSections.forEach((section) =>
+              section.classList.remove("active")
+            );
+            document
+              .getElementById(`${targetTab}-controls`)
+              .classList.add("active");
+          });
+        });
+      }
+
       // Initialize control event listeners
       function initializeControls() {
         // Color controls
@@ -1197,9 +1393,6 @@ export default {
         document
           .getElementById("secondary-color")
           .addEventListener("input", updateColorPreviews);
-        document
-          .getElementById("accent-color")
-          .addEventListener("input", updateColorPreviews);
 
         // Apply and reset buttons
         document
@@ -1208,6 +1401,9 @@ export default {
         document
           .getElementById("reset-config")
           .addEventListener("click", resetToDefault);
+        document
+          .getElementById("copy-code")
+          .addEventListener("click", copyCodeToClipboard);
       }
 
       // Update color previews
@@ -1215,7 +1411,6 @@ export default {
         const primaryColor = document.getElementById("primary-color").value;
         const secondaryColor = document.getElementById("secondary-color").value;
         const accentColor = document.getElementById("accent-color").value;
-
         document.getElementById("primary-preview").style.backgroundColor =
           primaryColor;
         document.getElementById("secondary-preview").style.backgroundColor =
@@ -1236,7 +1431,7 @@ export default {
         document.getElementById("secondary-color").value =
           brandColors.secondary || "#128C7E";
         document.getElementById("accent-color").value =
-          brandColors.accent || "#075E54";
+          brandColors.accent || "#6C5CE7";
 
         // Update typography controls
         document.getElementById("font-family").value =
@@ -1356,8 +1551,28 @@ export default {
       function updateCodeOutput(config) {
         const codeOutput = document.getElementById("code-output");
         const configString = JSON.stringify(config, null, 2);
-
         codeOutput.textContent = `window.whatsappWidget("#widget-container", ${configString});`;
+      }
+
+      // Copy code to clipboard
+      function copyCodeToClipboard() {
+        const codeOutput = document.getElementById("code-output");
+        const text = codeOutput.textContent;
+
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            const copyBtn = document.getElementById("copy-code");
+            const originalText = copyBtn.innerHTML;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+
+            setTimeout(() => {
+              copyBtn.innerHTML = originalText;
+            }, 2000);
+          })
+          .catch((err) => {
+            console.error("Failed to copy text: ", err);
+          });
       }
 
       // Reset to default

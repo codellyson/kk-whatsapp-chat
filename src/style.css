@@ -92,6 +92,12 @@
   justify-content: center;
 }
 
+.kk_wa-button:focus,
+.kk_wa-button:focus-visible,
+.kk_wa-button:active {
+  outline: none;
+}
+
 .kk_wa-button:hover {
   background-color: var(--kk_wa-secondary-color);
   transform: scale(1.05);
@@ -630,4 +636,50 @@
 .kk_wa-back-button svg {
   color: var(--kk_wa-primary-color);
   margin-right: var(--kk_wa-spacing-sm);
+}
+
+/* Branding Styles */
+.kk_wa-branding {
+  background-color: #f0f0f0 !important;
+  border-top: 2px solid var(--kk_wa-primary-color) !important;
+  padding: var(--kk_wa-spacing-md) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  min-height: 30px !important;
+}
+
+.kk_wa-branding-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--kk_wa-spacing-sm) !important;
+}
+
+.kk_wa-branding-logo {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.kk_wa-branding-logo-img {
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 2px !important;
+}
+
+.kk_wa-branding-text {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.kk_wa-branding-text a {
+  font-size: var(--kk_wa-font-size-xs) !important;
+  color: var(--kk_wa-dark-gray) !important;
+  margin: 0 !important;
+  font-weight: 600 !important;
+}
+.kk_wa-branding-text a:hover {
+  text-decoration: none;
+}
+.kk_wa-branding:hover .kk_wa-branding-text a {
+  color: var(--kk_wa-accent-color) !important;
 }
