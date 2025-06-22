@@ -1,3 +1,10 @@
+## [0.3.2](https://github.com/codellyson/kk-whatsapp-widget/compare/v0.3.1...v0.3.2) (2025-06-22)
+
+
+### Bug Fixes
+
+* Update index.html to correct logo path and specify widget version ([ba79e40](https://github.com/codellyson/kk-whatsapp-widget/commit/ba79e4056d9d1b581cde6e55b34fb3d0b52cf539))
+
 ## [0.3.1](https://github.com/codellyson/kk-whatsapp-widget/compare/v0.3.0...v0.3.1) (2025-06-22)
 
 
